@@ -52,15 +52,37 @@ Una fila con error **no se genera**: queda en el reporte con su motivo. El resto
 
 Si hay errores, el script termina con código 1, útil para automatizarlo.
 
-## La plantilla
+## Las plantillas
 
-`plantillas/firma.html` y `plantillas/firma.txt` son **provisorias**. Cuando la diseñadora entregue la plantilla definitiva, se reemplazan esos dos archivos (o se pasa otra con `--plantilla`). No hay que tocar el código.
+| Plantilla | Diseño | Uso |
+|---|---|---|
+| `plantillas/firma.html` + `.txt` | Provisoria simple: texto, logo y frase. Sin foto | Por defecto |
+| `plantillas/firma-v2.html` + `.txt` | Tarjeta con logo, **foto circular**, nombre, cargo (y área), email y web | `--plantilla plantillas/firma-v2.html` |
+
+Cuando la diseñadora entregue la plantilla definitiva, se agrega en `plantillas/` (o se reemplaza `firma.html`). No hay que tocar el código.
+
+## Fotos (plantilla v2)
+
+La foto es **opcional por persona**: si existe `../firmas/fotos/<usuario>.png`, la firma la muestra. Si no, la firma sale sin foto.
+
+Para preparar fotos nuevas:
+1. Juntá las fotos en una carpeta, nombradas con el usuario del email: `martinuribe.jpg`, `leonardo.pignato.png`. Mejor si vienen encuadradas de hombros para arriba.
+2. Ejecutá:
+   ```
+   python preparar_fotos.py "C:\ruta\a\la\carpeta"
+   ```
+   Las recorta en círculo, con borde gris claro, a 128×128 (se muestran a 64), y las deja en `../firmas/fotos/`.
+3. **Subilas al repositorio.** Son públicas, porque Outlook las toma de internet. Hasta que estén subidas, la foto se ve en el reporte, pero no en el mail.
+
+Se necesita `pillow`: `python -m pip install pillow`.
 
 **Campos** disponibles (se escriben entre llaves dobles, por ejemplo `{{nombre}}`):
 
 | Campo | Ejemplo |
 |---|---|
 | `nombre`, `apellido`, `cargo` | `Martín`, `Uribe`, `Project Manager` |
+| `area` | `Operaciones` (opcional, columna Área del Excel) |
+| `foto` | URL pública de la foto circular, o vacío si la persona no tiene foto |
 | `celular` | `+54 9 261 598-9229` (para mostrar) |
 | `celular_e164` | `+5492615989229` (para links `tel:`) |
 | `email` | `martinuribe@sandinas.com.ar` |
@@ -71,6 +93,7 @@ Si hay errores, el script termina con código 1, útil para automatizarlo.
 **Bloques opcionales**: lo que va entre los marcadores `SI:campo` y `FIN:campo` se elimina si la persona no tiene ese dato.
 - En HTML, como comentarios: `<!--SI:linkedin-->` … `<!--FIN:linkedin-->`
 - En texto, entre corchetes dobles: `[[SI:linkedin]]` … `[[FIN:linkedin]]`
+- Sirve con cualquier campo opcional: `linkedin`, `area`, `foto`.
 
 **Reglas para que la firma se vea bien en Outlook y Gmail:** tablas, estilos inline, ancho máximo 600 px, sin clases CSS, flex, grid ni SVG, tipografía con respaldo (`Arial`) y las imágenes en PNG con **URL absoluta** dentro de `{{assets}}`.
 

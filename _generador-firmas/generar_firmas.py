@@ -18,12 +18,14 @@ except ImportError:
     sys.exit("Falta la libreria openpyxl. Instalala con:  python -m pip install openpyxl")
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-ASSETS_URL = "https://solucionesandinassrl.github.io/firmas/assets"
-ASSETS_LOCAL = os.path.join(os.path.dirname(AQUI), "firmas", "assets")  # para la vista previa del reporte
+FIRMAS_URL = "https://solucionesandinassrl.github.io/firmas"
+FIRMAS_LOCAL = os.path.join(os.path.dirname(AQUI), "firmas")  # para la vista previa del reporte
+ASSETS_URL = FIRMAS_URL + "/assets"
+FOTOS_LOCAL = os.path.join(FIRMAS_LOCAL, "fotos")  # fotos circulares: <usuario>.png (ver preparar_fotos.py)
 FIJOS = {"empresa": "Soluciones Andinas", "web": "https://solucionesandinas.com.ar",
          "web_vis": "solucionesandinas.com.ar", "assets": ASSETS_URL}
 COLUMNAS = {"email": "email", "nombre": "nombre", "apellido": "apellido", "cargo": "cargo",
-            "celular": "celular", "linkedin": "linkedin", "incluir": "incluir"}
+            "area": "area", "celular": "celular", "linkedin": "linkedin", "incluir": "incluir"}
 OPCIONALES = ("linkedin",)
 
 
@@ -117,6 +119,9 @@ def validar(personas):
         else:
             p["email"] = email
             p["usuario"] = re.sub(r"[^a-z0-9._-]", "", email.split("@")[0])
+            # foto opcional: si existe firmas/fotos/<usuario>.png se usa su URL publica
+            p["foto"] = f"{FIRMAS_URL}/fotos/{p['usuario']}.png" if os.path.exists(
+                os.path.join(FOTOS_LOCAL, p["usuario"] + ".png")) else ""
             ok.append(p)
     return ok, errores, avisos
 
@@ -139,9 +144,9 @@ def completar(plantilla, datos, es_html):
 
 def reporte(destino, generadas, errores, avisos, plantilla_html):
     hoy = datetime.now().strftime("%d/%m/%Y %H:%M")
-    local = os.path.isdir(ASSETS_LOCAL)
+    local = os.path.isdir(FIRMAS_LOCAL)
     def vista(h):  # en la vista previa usa los archivos locales si existen (la URL publica puede no estar subida)
-        return h.replace(ASSETS_URL, "file:///" + ASSETS_LOCAL.replace("\\", "/")) if local else h
+        return h.replace(FIRMAS_URL, "file:///" + FIRMAS_LOCAL.replace("\\", "/")) if local else h
     filas_err = "".join(f"<tr><td>{f}</td><td>{html.escape(e)}</td><td>{html.escape(m)}</td></tr>" for f, e, m in errores)
     filas_av = "".join(f"<tr><td>{f}</td><td>{html.escape(e)}</td><td>{html.escape(m)}</td></tr>" for f, e, m in avisos)
     tarjetas = "".join(
@@ -171,7 +176,7 @@ h2{{font-size:15px;margin:8px 0 0}}
 <h2>Vista previa</h2>{tarjetas}
 </div>
 <script>
-var LOCAL = {json.dumps("file:///" + ASSETS_LOCAL.replace(chr(92), "/"))}, PUBLICA = {json.dumps(ASSETS_URL)};
+var LOCAL = {json.dumps("file:///" + FIRMAS_LOCAL.replace(chr(92), "/"))}, PUBLICA = {json.dumps(FIRMAS_URL)};
 document.addEventListener("click", function(e){{
   var b = e.target.closest("button[data-id]"); if(!b) return;
   var el = document.getElementById(b.dataset.id), r = document.createRange(); r.selectNodeContents(el);

@@ -1,0 +1,5 @@
+{{nombre}} {{apellido}}
+{{cargo}}[[SI:area]] - {{area}}[[FIN:area]]
+{{empresa}}
+{{email}}
+www.{{web_vis}}

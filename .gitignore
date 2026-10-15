@@ -11,6 +11,8 @@
 *.webp
 # Excepcion: imagenes publicas de la firma de correo (logo, iconos)
 !firmas/assets/*.png
+# Excepcion: fotos circulares de la firma (publicas a proposito: Outlook las toma de internet)
+!firmas/fotos/*.png
 
 # Generador de firmas: datos personales y resultados nunca se suben (el repo es publico)
 *.xlsx

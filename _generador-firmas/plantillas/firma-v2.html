@@ -1,0 +1,43 @@
+<!-- PLANTILLA V2 de prueba, basada en el diseno de referencia (tarjeta con logo, foto circular, nombre, cargo, email y web).
+     Campos y bloques opcionales: ver README.md. Reglas: tablas, estilos inline, sin clases, sin SVG, imagenes con URL absoluta. -->
+<table cellpadding="0" cellspacing="0" border="0" role="presentation" width="460" style="border-collapse:separate;width:460px;max-width:100%;background:#FFFFFF;border:1px solid #E6EAED;border-radius:14px;font-family:Poppins,'Segoe UI',Arial,Helvetica,sans-serif;color:#0C3B51;">
+  <tr>
+    <td style="padding:22px 26px 0 26px;">
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation" width="100%" style="border-collapse:collapse;">
+        <tr>
+          <td valign="middle" style="padding:0;">
+            <a href="{{web}}" style="text-decoration:none;"><img src="{{assets}}/logo-firma.png" width="176" height="38" alt="Soluciones Andinas" style="display:block;border:0;width:176px;height:38px;"></a>
+          </td>
+          <!--SI:foto--><td valign="middle" align="right" style="padding:0;width:64px;">
+            <img src="{{foto}}" width="64" height="64" alt="{{nombre}} {{apellido}}" style="display:block;border:0;width:64px;height:64px;">
+          </td><!--FIN:foto-->
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:16px 26px 0 26px;">
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation" width="100%" style="border-collapse:collapse;"><tr><td style="border-top:1px solid #E6EAED;font-size:1px;line-height:1px;height:1px;">&nbsp;</td></tr></table>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding:14px 26px 0 26px;font-size:18px;line-height:24px;font-weight:bold;color:#1A1A1A;">{{nombre}} {{apellido}}</td>
+  </tr>
+  <tr>
+    <td style="padding:2px 26px 0 26px;font-size:14px;line-height:20px;font-style:italic;color:#4A5257;">{{cargo}}<!--SI:area--> &mdash; {{area}}<!--FIN:area--></td>
+  </tr>
+  <tr>
+    <td style="padding:14px 26px 22px 26px;">
+      <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;">
+        <tr>
+          <td valign="middle" style="padding:0 10px 6px 0;width:16px;"><img src="{{assets}}/icono-email.png" width="16" height="16" alt="" style="display:block;border:0;width:16px;height:16px;"></td>
+          <td valign="middle" style="padding:0 0 6px 0;font-size:14px;line-height:20px;"><a href="mailto:{{email}}" style="color:#3A4248;text-decoration:none;">{{email}}</a></td>
+        </tr>
+        <tr>
+          <td valign="middle" style="padding:0 10px 0 0;width:16px;"><img src="{{assets}}/icono-web.png" width="16" height="16" alt="" style="display:block;border:0;width:16px;height:16px;"></td>
+          <td valign="middle" style="padding:0;font-size:14px;line-height:20px;"><a href="{{web}}" style="color:#1798D5;text-decoration:none;">www.{{web_vis}}</a></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
