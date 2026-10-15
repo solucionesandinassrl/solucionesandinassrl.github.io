@@ -25,7 +25,9 @@ FOTOS_LOCAL = os.path.join(FIRMAS_LOCAL, "fotos")  # fotos circulares: <usuario>
 FIJOS = {"empresa": "Soluciones Andinas", "web": "https://solucionesandinas.com.ar",
          "web_vis": "solucionesandinas.com.ar", "assets": ASSETS_URL}
 COLUMNAS = {"email": "email", "nombre": "nombre", "apellido": "apellido", "cargo": "cargo",
-            "area": "area", "celular": "celular", "linkedin": "linkedin", "incluir": "incluir"}
+            "area": "area", "celular": "celular", "celular_firma": "celular en firma",
+            "linkedin": "linkedin", "incluir": "incluir"}
+SI = ("si", "s", "1", "true", "x")
 OPCIONALES = ("linkedin",)
 
 
@@ -106,8 +108,11 @@ def validar(personas):
         for campo in ("nombre", "apellido", "cargo"):
             if not p.get(campo):
                 motivos.append(f"falta {campo}")
+        mostrar_cel = sin_tilde(p.get("celular_firma", "")).strip().lower() in SI
         try:
             p["celular_e164"], p["celular"] = normalizar_celular(p.get("celular"))
+            # celular_firma: el celular, solo si la persona lo quiere en la firma (columna "Celular en firma" = Si)
+            p["celular_firma"] = p["celular"] if mostrar_cel else ""
         except ValueError as e:
             motivos.append(str(e))
         try:
@@ -131,7 +136,8 @@ def completar(plantilla, datos, es_html):
     def bloque(m):
         return m.group(2) if datos.get(m.group(1)) else ""
     t = re.sub(r"<!--SI:(\w+)-->(.*?)<!--FIN:\1-->", bloque, plantilla, flags=re.S)
-    t = re.sub(r"\[\[SI:(\w+)\]\](.*?)\[\[FIN:\1\]\]\n?", bloque, t, flags=re.S)  # version texto
+    # version texto: si el bloque debe ocupar su propia linea, el salto de linea va DENTRO del bloque
+    t = re.sub(r"\[\[SI:(\w+)\]\](.*?)\[\[FIN:\1\]\]", bloque, t, flags=re.S)
     def valor(m):
         v = str(datos.get(m.group(1), ""))
         return html.escape(v, quote=True) if es_html else v

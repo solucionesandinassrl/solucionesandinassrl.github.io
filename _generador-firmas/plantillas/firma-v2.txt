@@ -1,5 +1,6 @@
 {{nombre}} {{apellido}}
 {{cargo}}[[SI:area]] - {{area}}[[FIN:area]]
 {{empresa}}
-{{email}}
+[[SI:celular_firma]]Cel: {{celular_firma}}
+[[FIN:celular_firma]]{{email}}
 www.{{web_vis}}

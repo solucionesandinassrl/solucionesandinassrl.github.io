@@ -57,7 +57,7 @@ Si hay errores, el script termina con código 1, útil para automatizarlo.
 | Plantilla | Diseño | Uso |
 |---|---|---|
 | `plantillas/firma.html` + `.txt` | Provisoria simple: texto, logo y frase. Sin foto | Por defecto |
-| `plantillas/firma-v2.html` + `.txt` | Tarjeta con logo, **foto circular**, nombre, cargo (y área), email y web | `--plantilla plantillas/firma-v2.html` |
+| `plantillas/firma-v2.html` + `.txt` | **Diseño aprobado.** Tarjeta con logo, **foto circular**, nombre, cargo (y área), celular (solo si "Celular en firma" = Sí), email y web | `--plantilla plantillas/firma-v2.html` |
 
 Cuando la diseñadora entregue la plantilla definitiva, se agrega en `plantillas/` (o se reemplaza `firma.html`). No hay que tocar el código.
 
@@ -82,6 +82,7 @@ Se necesita `pillow`: `python -m pip install pillow`.
 |---|---|
 | `nombre`, `apellido`, `cargo` | `Martín`, `Uribe`, `Project Manager` |
 | `area` | `Operaciones` (opcional, columna Área del Excel) |
+| `celular_firma` | El celular visible, **solo** si la columna "Celular en firma" dice Sí. Si no, vacío (para usar en un bloque opcional) |
 | `foto` | URL pública de la foto circular, o vacío si la persona no tiene foto |
 | `celular` | `+54 9 261 598-9229` (para mostrar) |
 | `celular_e164` | `+5492615989229` (para links `tel:`) |
@@ -93,7 +94,8 @@ Se necesita `pillow`: `python -m pip install pillow`.
 **Bloques opcionales**: lo que va entre los marcadores `SI:campo` y `FIN:campo` se elimina si la persona no tiene ese dato.
 - En HTML, como comentarios: `<!--SI:linkedin-->` … `<!--FIN:linkedin-->`
 - En texto, entre corchetes dobles: `[[SI:linkedin]]` … `[[FIN:linkedin]]`
-- Sirve con cualquier campo opcional: `linkedin`, `area`, `foto`.
+- Sirve con cualquier campo opcional: `linkedin`, `area`, `foto`, `celular_firma`.
+- En texto, si el bloque tiene que ocupar su propia línea, el salto de línea va **dentro** del bloque (antes de `[[FIN:...]]`).
 
 **Reglas para que la firma se vea bien en Outlook y Gmail:** tablas, estilos inline, ancho máximo 600 px, sin clases CSS, flex, grid ni SVG, tipografía con respaldo (`Arial`) y las imágenes en PNG con **URL absoluta** dentro de `{{assets}}`.
 
