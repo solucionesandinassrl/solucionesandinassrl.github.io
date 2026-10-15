@@ -8,8 +8,8 @@
           <td valign="middle" style="padding:0;">
             <a href="{{web}}" style="text-decoration:none;"><img src="{{assets}}/logo-firma.png" width="176" height="38" alt="Soluciones Andinas" style="display:block;border:0;width:176px;height:38px;"></a>
           </td>
-          <!--SI:foto--><td valign="middle" align="right" style="padding:0;width:64px;">
-            <img src="{{foto}}" width="64" height="64" alt="{{nombre}} {{apellido}}" style="display:block;border:0;width:64px;height:64px;">
+          <!--SI:foto--><td valign="middle" align="right" width="64" style="padding:0;width:64px;min-width:64px;">
+            <img src="{{foto}}" width="64" height="64" alt="{{nombre}} {{apellido}}" style="display:block;border:0;width:64px;height:64px;min-width:64px;max-width:none;">
           </td><!--FIN:foto-->
         </tr>
       </table>
@@ -30,12 +30,12 @@
     <td style="padding:14px 26px 22px 26px;">
       <table cellpadding="0" cellspacing="0" border="0" role="presentation" style="border-collapse:collapse;">
         <tr>
-          <td valign="middle" style="padding:0 10px 6px 0;width:16px;"><img src="{{assets}}/icono-email.png" width="16" height="16" alt="" style="display:block;border:0;width:16px;height:16px;"></td>
-          <td valign="middle" style="padding:0 0 6px 0;font-size:14px;line-height:20px;"><a href="mailto:{{email}}" style="color:#3A4248;text-decoration:none;">{{email}}</a></td>
+          <td valign="middle" width="16" style="padding:0 0 6px 0;width:16px;min-width:16px;"><img src="{{assets}}/icono-email.png" width="16" height="16" alt="" style="display:block;border:0;width:16px;height:16px;min-width:16px;max-width:none;"></td>
+          <td valign="middle" style="padding:0 0 6px 10px;font-size:14px;line-height:20px;"><a href="mailto:{{email}}" style="color:#3A4248;text-decoration:none;">{{email}}</a></td>
         </tr>
         <tr>
-          <td valign="middle" style="padding:0 10px 0 0;width:16px;"><img src="{{assets}}/icono-web.png" width="16" height="16" alt="" style="display:block;border:0;width:16px;height:16px;"></td>
-          <td valign="middle" style="padding:0;font-size:14px;line-height:20px;"><a href="{{web}}" style="color:#1798D5;text-decoration:none;">www.{{web_vis}}</a></td>
+          <td valign="middle" width="16" style="padding:0;width:16px;min-width:16px;"><img src="{{assets}}/icono-web.png" width="16" height="16" alt="" style="display:block;border:0;width:16px;height:16px;min-width:16px;max-width:none;"></td>
+          <td valign="middle" style="padding:0 0 0 10px;font-size:14px;line-height:20px;"><a href="{{web}}" style="color:#1798D5;text-decoration:none;">www.{{web_vis}}</a></td>
         </tr>
       </table>
     </td>
