@@ -9,3 +9,14 @@
 *.heic
 *.HEIC
 *.webp
+# Excepcion: imagenes publicas de la firma de correo (logo, iconos)
+!firmas/assets/*.png
+
+# Generador de firmas: datos personales y resultados nunca se suben (el repo es publico)
+*.xlsx
+*.xls
+*.csv
+!_generador-firmas/plantilla-personas.xlsx
+_generador-firmas/salida/
+~$*
+__pycache__/

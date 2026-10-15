@@ -1,0 +1,7 @@
+{{nombre}} {{apellido}}
+{{cargo}} | {{empresa}}
+Cel: {{celular}}
+{{email}}
+{{web_vis}}
+[[SI:linkedin]]LinkedIn: {{linkedin}}
+[[FIN:linkedin]]
