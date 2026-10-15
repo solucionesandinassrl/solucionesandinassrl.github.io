@@ -1,0 +1,11 @@
+# Solo se publican tarjetas (index.html) y vCards (contacto.vcf).
+# Las fotos van embebidas en el HTML: ninguna imagen suelta debe subirse.
+*.png
+*.PNG
+*.jpg
+*.JPG
+*.jpeg
+*.JPEG
+*.heic
+*.HEIC
+*.webp
